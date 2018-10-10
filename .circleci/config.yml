@@ -1,9 +1,12 @@
+defaults: &defaults
+  working_directory: /usr/src/app
+  docker:
+      - image: banian/node
+
 version: 2
 jobs:
-  build:
-    working_directory: /usr/src/app
-    docker:
-      - image: banian/node
+  setup:
+    <<: *defaults
     steps:
       # Checkout repository
       - checkout
@@ -22,23 +25,54 @@ jobs:
           key: yarn-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
-
+  lint:
+    <<: *defaults
+    steps:
       # Lint
       - run:
           name: Lint
           command: yarn lint
 
+  build:
+    <<: *defaults
+    steps:
       # Build
       - run:
           name: Build
           command:  yarn build
 
+  test:
+    <<: *defaults
+    steps:
       # Test
       - run:
           name: Test
           command: NODE_ENV=test yarn test
 
+  coverage:
+    <<: *defaults
+    steps:
       # Coverage
       - run:
           name: Coverage
           command: yarn codecov
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - build:
+          requires:
+            - setup
+      - test:
+          requires:
+           - setup
+      - coverage:
+          requires:
+           - lint
+           - build
+           - test
