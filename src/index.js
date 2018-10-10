@@ -30,6 +30,9 @@ class Locker {
     }
     this.scrollElement.scrollTop = this.scrollTop
 
+    delete this.style
+    delete this.scrollTop
+
     return this
   }
 }
