@@ -25,9 +25,17 @@ jobs:
           key: yarn-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
+
+      - persist_to_workspace:
+          root: /usr/src
+          paths:
+            - app
   lint:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: /usr/src/app
+
       # Lint
       - run:
           name: Lint
@@ -36,6 +44,9 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: /usr/src/app
+
       # Build
       - run:
           name: Build
@@ -44,14 +55,14 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: /usr/src/app
+
       # Test
       - run:
           name: Test
           command: NODE_ENV=test yarn test
 
-  coverage:
-    <<: *defaults
-    steps:
       # Coverage
       - run:
           name: Coverage
@@ -70,9 +81,5 @@ workflows:
             - setup
       - test:
           requires:
-           - setup
-      - coverage:
-          requires:
            - lint
            - build
-           - test
