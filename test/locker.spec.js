@@ -1,4 +1,4 @@
-const createLocker = require('../dist/lock-body-scroll.cjs')
+import createLocker from '../src'
 
 describe('lock body scroll', () => {
   test('should create locker instance on documentElement', () => {

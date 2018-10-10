@@ -13,12 +13,16 @@
   ],
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
-    "test": "jest",
+    "test": "jest --coverage",
     "build": "yarn build:client && yarn build:server",
     "build:client": "bili --format umd,umd-min",
     "build:server": "bili --format cjs --target node"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^23.6.0",
     "bili": "^3.1.2",
     "codecov": "^3.1.0",
     "eslint": "^5.6.1",
