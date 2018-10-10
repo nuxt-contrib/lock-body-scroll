@@ -34,7 +34,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: /usr/src/app
+          at: /usr/src
 
       # Lint
       - run:
@@ -45,7 +45,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: /usr/src/app
+          at: /usr/src
 
       # Build
       - run:
@@ -56,7 +56,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: /usr/src/app
+          at: /usr/src
 
       # Test
       - run:
