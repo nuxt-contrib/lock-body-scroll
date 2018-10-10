@@ -16,7 +16,8 @@
     "test": "jest --coverage",
     "build": "yarn build:client && yarn build:server",
     "build:client": "bili --format umd,umd-min",
-    "build:server": "bili --format cjs --target node"
+    "build:server": "bili --format cjs --target node",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -32,6 +33,7 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "standard-version": "^4.4.0"
   }
 }
