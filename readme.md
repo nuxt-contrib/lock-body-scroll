@@ -54,7 +54,7 @@ HTML:
 
 ```html
 <head>
-  <script src="lock-body-scroll.min.js" />
+  <script src="https://cdn.jsdelivr.net/npm/lock-body-scroll" />
 </head>
 ```
 
